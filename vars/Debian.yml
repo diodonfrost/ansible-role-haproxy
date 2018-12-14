@@ -1,0 +1,3 @@
+---
+haproxy_package: haproxy
+haproxy_service: haproxy

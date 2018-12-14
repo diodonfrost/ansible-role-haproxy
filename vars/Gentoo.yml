@@ -1,0 +1,3 @@
+---
+haproxy_package: net-proxy/haproxy
+haproxy_service: haproxy

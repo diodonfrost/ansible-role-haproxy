@@ -1,2 +1,11 @@
 ---
 # tasks file for ansible-role-haproxy
+
+- name: Set OS dependent variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install haproxy
+  include_tasks: install.yml
+
+- name: Setup haproxy
+  include_tasks: setup.yml
