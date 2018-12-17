@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - ansible-role-haproxy
+  vars:
+    haproxy_listen_config: |
+      listen app 127.0.0.1:8080
+          balance     roundrobin
+          option      forwardfor
+          server app1 127.0.0.1:8080 check
+          server app2 127.0.0.2:8080 check

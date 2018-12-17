@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - ansible-role-haproxy
+  vars:
+    haproxy_frontend_config: |
+      frontend http-in
+          bind 127.0.0.1:8080
+          default_backend servers
+
+    haproxy_backend_config: |
+      backend servers
+          server server1 127.0.0.1:8080 maxconn 32

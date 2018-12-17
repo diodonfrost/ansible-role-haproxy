@@ -143,7 +143,20 @@ platforms:
 
 # Define playbook
 suites:
+  # Test default playbook
   - name: default
     provisioner:
       name: ansible_playbook
-      playbook: tests/test.yml
+      playbook: tests/playbooks/default.yml
+
+  # Test frontend configuration
+  - name: frontend
+    provisioner:
+      name: ansible_playbook
+      playbook: tests/playbooks/frontend.yml
+
+  # Test listen configuration
+  - name: listen
+    provisioner:
+      name: ansible_playbook
+      playbook: tests/playbooks/listen.yml
