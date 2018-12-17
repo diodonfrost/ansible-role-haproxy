@@ -43,6 +43,7 @@ haproxy_defaults_timeouts:
 #      server app2 app2:80 check
 haproxy_listen_config: |
   listen app
+      bind 127.0.0.1:8080
       server app1 127.0.0.1:8080 check
 
 # Add frontend configuration
