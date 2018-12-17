@@ -8,6 +8,5 @@
     owner: "{{ haproxy_user_configfile }}"
     group: "{{ haproxy_group_configfile }}"
     mode: 0644
-  notify:
-    - "Check haproxy configuration on {{ ansible_system }}"
-    - "Restart haproxy on {{ ansible_system }}"
+    validate: haproxy -f %s -c -q
+  notify: "Restart haproxy on {{ ansible_system }}"
