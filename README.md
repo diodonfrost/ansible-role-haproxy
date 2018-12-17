@@ -1,38 +1,211 @@
-Role Name
-=========
+# haproxy
 
-A brief description of the role goes here.
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-diodonfrost.haproxy-660198.svg)](https://galaxy.ansible.com/diodonfrost/haproxy)
+[![Build Status](https://travis-ci.org/diodonfrost/ansible-role-haproxy.svg?branch=master)](https://travis-ci.org/diodonfrost/ansible-role-haproxy)
 
-Requirements
-------------
+This role provide compliance for install and setup haproxy on your target host.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+This role was developed using Ansible 2.4 Backwards compatibility is not guaranteed.
+Use `ansible-galaxy install diodonfrost.haproxy` to install the role on your system.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Supported platforms:
 
-Dependencies
-------------
+```yaml
+- name: EL
+  versions:
+    - 7
+    - 6
+- name: Fedora
+  versions:
+    - 29
+    - 28
+    - 27
+    - 26
+- name: Debian
+  versions:
+    - stretch
+    - jessie
+- name: Ubuntu
+  versions:
+    - bionic
+    - xenial
+    - trusty
+    - precise
+- name: OracleLinux
+  versions:
+    - 7
+    - 6
+- name: Amazon
+  versions:
+    - 2017.12
+    - 2016.03
+- name: opensuse
+  versions:
+    - 42.3
+    - 42.2
+    - 42.1
+- name: SLES
+  versions:
+    - 11
+    - 12
+    - 15
+- name: ArchLinux
+  versions:
+    - any
+- name: Gentoo
+  versions:
+    - stage3
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Role Variables
 
-Example Playbook
-----------------
+This role has multiple variables. The defaults for all these variables are the following:
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+---
+# defaults file for ansible-role-haproxy
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+default_log: 127.0.0.1 local2
+default_chroot: /var/lib/haproxy
+default_pidfile: /var/run/haproxy.pid
+default_maxconn: 4000
+default_user: haproxy
+default_group: haproxy
 
-License
--------
+haproxy_default_listen:
+  - mode                    http
+  - log                     global
+  - retries                 3
+  - maxconn                 3000
 
-BSD
+haproxy_defaults_options:
+  - httplog
+  - dontlognull
+  - http-server-close
+  - forwardfor except 127.0.0.0/8
+  - redispatch
 
-Author Information
-------------------
+haproxy_defaults_timeouts:
+  - http-request            10s
+  - queue                   1m
+  - connect                 10s
+  - client                  1m
+  - server                  1m
+  - http-keep-alive         10s
+  - check                   10s
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+# Add listen configuration
+# Examples:
+#haproxy_listen_config:|
+#  listen int_espaceclient 1.1.1.1:9120
+#      balance     roundrobin
+#      option      forwardfor
+#      server intapp1 intapp1:9020 check
+#      server intapp2 intapp2:9020 check
+haproxy_listen_config:
+
+# Add frontend configuration
+# Examples:
+#haproxy_frontend_config:|
+#  frontend main
+#      bind *:5000
+#      default_backend  app
+haproxy_frontend_config:
+
+# Add backend configuration
+# Examples:
+#haproxy_backend_config:|
+#  backend app2
+#      balance     roundrobin
+#      server  app3 127.0.0.1:5003 check
+#      server  app4 127.0.0.1:5004 check
+haproxy_backend_config:
+```
+
+## Dependencies
+
+None
+
+## Example Playbook
+
+This is a sample playbook file for deploying the Ansible Galaxy haproxy role in a localhost and installing haproxy.
+
+```yaml
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - role: diodonfrost.haproxy
+```
+
+#### Example with frontend and backend
+
+```yaml
+- hosts: localhost
+  remote_user: root
+  roles:
+    - role: diodonfrost.haproxy
+  vars:
+    haproxy_listen_config:|
+      listen int_espaceclient 1.1.1.1:9120
+          balance     roundrobin
+          option      forwardfor
+          server intapp1 intapp1:9020 check
+          server intapp2 intapp2:9020 check
+
+## Local Testing
+
+The preferred way of locally testing the role is to use Docker. You will have to install Docker on your system.
+
+You can also use vagrant and Virtualbox with vagrant to run tests locally. You will have to install Virtualbox and Vagrant on your system.
+ For all our tests we use test-kitchen.
+
+Next install test-kitchen:
+
+```shell
+# Install dependencies
+gem install bundler
+bundle install
+```
+
+### Testing with Docker
+
+```shell
+# List all tests with kitchen
+kitchen list
+
+# fast test on one machine
+kitchen test default-centos-7
+
+# test on all machines
+kitchen test
+
+# for development, create environment
+kitchen create default-centos-7
+
+# Apply ansible playbook
+kitchen converge default-centos-7
+
+# Apply inspec tests
+kitchen verify default-centos-7
+```
+
+### Testing with Virtualbox
+
+```shell
+# Specify kitchen
+set KITCHEN_YAML=.kitchen-vagrant.yml
+
+# fast test on one machine
+kitchen test default-centos-7
+```
+
+## License
+
+Apache 2
+
+## Author Information
+
+This role was created in 2018 by diodonfrost.
