@@ -27,22 +27,16 @@ env:
     version: "9"
   - distribution: debian
     version: "8"
-  - distribution: debian
-    version: "7"
   - distribution: oraclelinux
     version: "7"
   - distribution: oraclelinux
     version: "6"
   - distribution: amazonlinux
     version: "2"
-  - distribution: amazonlinux
-    version: "1"
   - distribution: opensuse
     version: "42.3"
   - distribution: opensuse
     version: "42.2"
-  - distribution: opensuse
-    version: "13.2"
   - distribution: archlinux
     version: "rolling"
 
