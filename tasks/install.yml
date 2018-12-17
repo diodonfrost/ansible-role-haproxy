@@ -16,9 +16,3 @@
   package:
     name: "{{ haproxy_package }}"
     state: present
-
-- name: Manage haproxy service
-  service:
-    name: "{{ haproxy_service }}"
-    enabled: yes
-    state: started

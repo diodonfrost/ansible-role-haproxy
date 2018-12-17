@@ -1,12 +1,14 @@
 ---
 # defaults file for ansible-role-haproxy
-
-default_log: 127.0.0.1 local2
-default_chroot: /var/lib/haproxy
-default_pidfile: /var/run/haproxy.pid
-default_maxconn: 4000
-default_user: haproxy
-default_group: haproxy
+haproxy_global_options:
+  log: 127.0.0.1 local2
+  chroot: /var/lib/haproxy
+  pidfile: /var/run/haproxy.pid
+  maxconn: 4000
+  user: haproxy
+  group: haproxy
+  daemon:
+  stats: socket /var/lib/haproxy/stats
 
 haproxy_default_listen:
   - mode                    http
@@ -43,29 +45,16 @@ haproxy_listen_config:
 # Add frontend configuration
 # Examples:
 #haproxy_frontend_config:|
-#frontend main
-#    bind *:5000
-#    default_backend  app
+#  frontend main
+#      bind *:5000
+#      default_backend  app
 haproxy_frontend_config:
 
 # Add backend configuration
 # Examples:
 #haproxy_backend_config:|
-#backend app2
-#    balance     roundrobin
-#    server  app3 127.0.0.1:5003 check
-#    server  app4 127.0.0.1:5004 check
+#  backend app2
+#      balance     roundrobin
+#      server  app3 127.0.0.1:5003 check
+#      server  app4 127.0.0.1:5004 check
 haproxy_backend_config:
-
-# Add custom configuration
-# Examples:
-#haproxy_custom_config:|
-#frontend main
-#    bind *:5000
-#    default_backend  app
-#
-#backend app2
-#    balance     roundrobin
-#    server  app3 127.0.0.1:5003 check
-#    server  app4 127.0.0.1:5004 check
-haproxy_custom_config:
