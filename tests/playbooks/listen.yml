@@ -5,7 +5,8 @@
     - ansible-role-haproxy
   vars:
     haproxy_listen_config: |
-      listen app 127.0.0.1:8080
+      listen app
+          bind        127.0.0.1:8080
           balance     roundrobin
           option      forwardfor
           server app1 127.0.0.1:8080 check

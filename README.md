@@ -66,13 +66,15 @@ This role has multiple variables. The defaults for all these variables are the f
 ```yaml
 ---
 # defaults file for ansible-role-haproxy
-
-default_log: 127.0.0.1 local2
-default_chroot: /var/lib/haproxy
-default_pidfile: /var/run/haproxy.pid
-default_maxconn: 4000
-default_user: haproxy
-default_group: haproxy
+haproxy_global_options:
+  log: 127.0.0.1 local2
+  chroot: /var/lib/haproxy
+  pidfile: /var/run/haproxy.pid
+  maxconn: 4000
+  user: haproxy
+  group: haproxy
+  daemon:
+  stats: socket /var/lib/haproxy/stats
 
 haproxy_default_listen:
   - mode                    http
@@ -98,17 +100,20 @@ haproxy_defaults_timeouts:
 
 # Add listen configuration
 # Examples:
-#haproxy_listen_config:|
-#  listen int_espaceclient 1.1.1.1:9120
+#haproxy_listen_config: |
+#  listen app
+#      bind        127.0.0.1:80
 #      balance     roundrobin
 #      option      forwardfor
-#      server intapp1 intapp1:9020 check
-#      server intapp2 intapp2:9020 check
-haproxy_listen_config:
+#      server app1 app1:80 check
+#      server app2 app2:80 check
+haproxy_listen_config: |
+  listen app
+      server app1 127.0.0.1:8080 check
 
 # Add frontend configuration
 # Examples:
-#haproxy_frontend_config:|
+#haproxy_frontend_config: |
 #  frontend main
 #      bind *:5000
 #      default_backend  app
@@ -116,7 +121,7 @@ haproxy_frontend_config:
 
 # Add backend configuration
 # Examples:
-#haproxy_backend_config:|
+#haproxy_backend_config: |
 #  backend app2
 #      balance     roundrobin
 #      server  app3 127.0.0.1:5003 check

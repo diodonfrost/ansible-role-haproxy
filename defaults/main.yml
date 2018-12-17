@@ -35,7 +35,8 @@ haproxy_defaults_timeouts:
 # Add listen configuration
 # Examples:
 #haproxy_listen_config: |
-#  listen app 127.0.0.1:80
+#  listen app
+#      bind        127.0.0.1:80
 #      balance     roundrobin
 #      option      forwardfor
 #      server app1 app1:80 check
