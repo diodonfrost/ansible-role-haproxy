@@ -1,3 +1,7 @@
 ---
 haproxy_package: haproxy
 haproxy_service: haproxy
+
+haproxy_configfile: /etc/haproxy/haproxy.cfg
+haproxy_user_configfile: root
+haproxy_group_configfile: root

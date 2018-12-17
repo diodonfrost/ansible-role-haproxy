@@ -32,7 +32,6 @@ platforms:
   - name: ubuntu-14.04
   - name: debian-9
   - name: debian-8
-  - name: debian-7
   - name: oraclelinux-7
     driver:
       box: bento/oracle-7

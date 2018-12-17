@@ -1,2 +1,31 @@
 ---
 # defaults file for ansible-role-haproxy
+
+default_log: 127.0.0.1 local2
+default_chroot: /var/lib/haproxy
+default_pidfile: /var/run/haproxy.pid
+default_maxconn: 4000
+default_user: haproxy
+default_group: haproxy
+
+haproxy_default_listen:
+  - mode                    http
+  - log                     global
+  - retries                 3
+  - maxconn                 3000
+
+haproxy_defaults_options:
+  - httplog
+  - dontlognull
+  - http-server-close
+  - forwardfor except 127.0.0.0/8
+  - redispatch
+
+haproxy_defaults_timeouts:
+  - http-request            10s
+  - queue                   1m
+  - connect                 10s
+  - client                  1m
+  - server                  1m
+  - http-keep-alive         10s
+  - check                   10s

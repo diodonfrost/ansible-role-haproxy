@@ -1,2 +1,13 @@
 ---
 # tasks file for ansible-role-haproxy
+
+- name: Seting-up haproxy
+  template:
+    src: haproxy.cfg.j2
+    dest: "{{ haproxy_configfile }}"
+    owner: "{{ haproxy_user_configfile }}"
+    group: "{{ haproxy_group_configfile }}"
+    mode: 0644
+  notify:
+    - "Check haproxy configuration on {{ ansible_system }}"
+    - "Restart haproxy on {{ ansible_system }}"

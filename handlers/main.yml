@@ -1,2 +1,10 @@
 ---
 # handlers file for ansible-role-haproxy
+
+- name: Check haproxy configuration on Linux
+  command: haproxy -c -V -f {{ haproxy_configfile }}
+
+- name: Restart haproxy on Linux
+  service:
+    name: "{{ haproxy_service }}"
+    state: restarted

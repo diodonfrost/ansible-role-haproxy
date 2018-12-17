@@ -83,10 +83,6 @@ platforms:
       image: diodonfrost/debian-8-ansible
       run_command: /sbin/init
       platform: debian
-  - name: debian-7
-    driver:
-      image: diodonfrost/debian-7-ansible
-      platform: debian
 
   # Oraclelinux
   - name: oraclelinux-7
@@ -129,14 +125,6 @@ platforms:
   - name: opensuse-42.2
     driver:
       image: diodonfrost/opensuse-42.2-ansible
-      run_command: /usr/lib/systemd/systemd
-      platform: opensuse
-      provision_command:
-        - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
-        - systemctl enable sshd
-  - name: opensuse-13.2
-    driver:
-      image: diodonfrost/opensuse-13.2-ansible
       run_command: /usr/lib/systemd/systemd
       platform: opensuse
       provision_command:
