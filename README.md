@@ -65,6 +65,10 @@ This role has multiple variables. The defaults for all these variables are the f
 
 ```yaml
 ---
+# Install haproxy
+# Default is 'true'
+haproxy_install: true
+
 # defaults file for ansible-role-haproxy
 haproxy_global_options:
   log: 127.0.0.1 local2
@@ -74,7 +78,7 @@ haproxy_global_options:
   user: haproxy
   group: haproxy
   daemon:
-  stats: socket /var/lib/haproxy/stats
+  stats: socket /var/run/haproxy.socks
 
 haproxy_default_listen:
   - mode                    http
@@ -109,6 +113,7 @@ haproxy_defaults_timeouts:
 #      server app2 app2:80 check
 haproxy_listen_config: |
   listen app
+      bind 127.0.0.1:8080
       server app1 127.0.0.1:8080 check
 
 # Add frontend configuration

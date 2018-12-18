@@ -5,7 +5,8 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Install haproxy
-  include_tasks: install.yml
+  include_tasks: "packages/install-{{ ansible_system }}.yml"
+  when: haproxy_install == true
 
 - name: Setup haproxy
   include_tasks: setup.yml

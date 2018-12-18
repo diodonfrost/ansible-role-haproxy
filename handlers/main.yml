@@ -5,3 +5,8 @@
   service:
     name: "{{ haproxy_service }}"
     state: restarted
+
+- name: Restart haproxy on FreeBSD
+  service:
+    name: "{{ haproxy_service }}"
+    state: restarted

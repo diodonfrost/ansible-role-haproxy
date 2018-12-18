@@ -30,6 +30,5 @@ control 'install-03' do
   describe user(haproxy_user) do
     it { should exist }
     its('group') { should eq 'haproxy' }
-    its('shell') { should eq '/sbin/nologin' }
   end
 end

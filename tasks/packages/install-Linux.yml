@@ -1,5 +1,5 @@
 ---
-# tasks file for ansible-role-haproxy
+# tasks file for install haproxy package on Linux system
 
 - name: Update apt cache on Debian Family os
   apt:
@@ -12,7 +12,7 @@
   changed_when: false
   when: ansible_os_family == "Gentoo"
 
-- name: Install haproxy
+- name: Install haproxy on Linux system
   package:
     name: "{{ haproxy_package }}"
     state: present
