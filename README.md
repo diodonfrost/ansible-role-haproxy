@@ -57,6 +57,16 @@ Supported platforms:
 - name: Gentoo
   versions:
     - stage3
+- name: FreeBSD
+  versions:
+    - 12.0
+    - 11.2
+    - 10.4
+    - 10.3
+- name: OpenBSD
+  versions:
+    - 6.0
+    - 6.4
 ```
 
 ## Role Variables

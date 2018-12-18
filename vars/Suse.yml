@@ -3,5 +3,7 @@ haproxy_package: haproxy
 haproxy_service: haproxy
 
 haproxy_configfile: /etc/haproxy/haproxy.cfg
+haproxy_log: 127.0.0.1 local2
+haproxy_chroot: /var/lib/haproxy
 haproxy_user_configfile: root
 haproxy_group_configfile: root

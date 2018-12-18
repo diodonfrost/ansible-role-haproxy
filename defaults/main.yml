@@ -5,8 +5,8 @@ haproxy_install: true
 
 # defaults file for ansible-role-haproxy
 haproxy_global_options:
-  log: 127.0.0.1 local2
-  chroot: /var/lib/haproxy
+  log: "{{ haproxy_log }}"
+  chroot: "{{ haproxy_chroot }}"
   pidfile: /var/run/haproxy.pid
   maxconn: 4000
   user: haproxy
