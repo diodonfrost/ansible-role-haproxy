@@ -174,6 +174,7 @@ This is a sample playbook file for deploying the Ansible Galaxy haproxy role in 
           option      forwardfor
           server intapp1 intapp1:9020 check
           server intapp2 intapp2:9020 check
+```
 
 ## Local Testing
 
@@ -220,6 +221,27 @@ set KITCHEN_YAML=.kitchen-vagrant.yml
 
 # fast test on one machine
 kitchen test default-centos-7
+```
+
+### Testing Solaris
+
+Solaris can only be test with Virtualbox provider,do not use 'kitchen test' command for testing. There 5 steps you will be using with test-kitchen as part of your workflow.
+
+```shell
+# Specify kitchen
+set KITCHEN_YAML=.kitchen-solaris.yml
+
+#  Deploy environment
+kitchen create
+
+# Apply playbook on Solaris
+kitchen converge
+
+# Apply inspec tests on Solaris
+kitchen verify
+
+# Destroy environment
+kitchen destroy
 ```
 
 ## License
