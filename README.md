@@ -1,7 +1,6 @@
 # haproxy
 
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-diodonfrost.haproxy-660198.svg)](https://galaxy.ansible.com/diodonfrost/haproxy)
-[![Build Status](https://travis-ci.org/diodonfrost/ansible-role-haproxy.svg?branch=master)](https://travis-ci.org/diodonfrost/ansible-role-haproxy)
 
 This role provide compliance for install and setup haproxy on your target host.
 
